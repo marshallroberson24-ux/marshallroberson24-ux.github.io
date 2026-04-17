@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marshall Roberson — Cybersecurity & IAM Professional</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #141414;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #f0f0f0;
+    --text-secondary: #888;
+    --text-tertiary: #555;
+    --accent: #7c6df0;
+    --accent-light: #a89cf5;
+    --green: #22c55e;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(15,15,15,0.95); backdrop-filter: blur(8px); z-index: 100; }
+  .nav-logo { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 14px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .hero { padding: 5rem 2rem 4rem; max-width: 800px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--text-secondary); margin-bottom: 2rem; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+  .hero h1 .accent { color: var(--accent-light); }
+  .hero-desc { font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; max-width: 580px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+  .tag { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--text-secondary); }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-hover); border-radius: var(--radius-sm); padding: 12px 24px; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-secondary:hover { background: var(--bg-secondary); }
+  .divider { height: 1px; background: var(--border); margin: 0 2rem; }
+  .section { padding: 4rem 2rem; max-width: 900px; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .section-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--border-hover); }
+  .skill-card-cat { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .skill-card-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .skill-tag { font-size: 11px; color: var(--text-secondary); background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .project-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s, transform 0.2s; }
+  .project-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .project-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(124,109,240,0.15); border: 1px solid rgba(124,109,240,0.3); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .project-status { font-size: 11px; padding: 3px 9px; border-radius: 10px; font-weight: 500; }
+  .project-status.dev { color: #fb923c; background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); }
+  .project-status.done { color: var(--text-tertiary); background: var(--bg-secondary); border: 1px solid var(--border); }
+  .project-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+  .stack-tag { font-size: 11px; background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; }
+  .project-link { font-size: 13px; color: var(--accent-light); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: auto; font-weight: 500; }
+  .project-link:hover { text-decoration: underline; }
+  .resume-download { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; font-size: 13px; color: var(--text); text-decoration: none; margin-bottom: 2.5rem; transition: border-color 0.2s; }
+  .resume-download:hover { border-color: var(--border-hover); }
+  .resume-block { margin-bottom: 2.5rem; }
+  .resume-block-title { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .resume-item { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .resume-item-title { font-size: 15px; font-weight: 600; }
+  .resume-item-sub { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  .resume-item-date { font-size: 12px; color: var(--text-tertiary); white-space: nowrap; }
+  .resume-bullets { margin-top: 8px; padding-left: 16px; }
+  .resume-bullets li { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; line-height: 1.5; }
+  .cert-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; font-size: 12px; color: var(--text-secondary); margin: 4px 4px 0 0; }
+  .cert-badge.in-progress { border-color: rgba(124,109,240,0.4); color: var(--accent-light); background: rgba(124,109,240,0.08); }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; max-width: 640px; }
+  .contact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
+  .contact-card:hover { border-color: var(--border-hover); }
+  .contact-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 6px; }
+  .contact-value { font-size: 14px; font-weight: 500; }
+  .contact-value a { color: var(--text); text-decoration: none; }
+  .contact-value a:hover { color: var(--accent-light); }
+  footer { padding: 2rem; text-align: center; font-size: 13px; color: var(--text-tertiary); border-top: 1px solid var(--border); }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 32px; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+    .section { padding: 3rem 1rem; }
+    .hero { padding: 3rem 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Marshall Roberson</span>
+  <div class="nav-links">
+    <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
+    <a href="#resume">resume</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<div class="hero" id="about">
+  <div class="hero-badge"><span class="status-dot"></span> Open to opportunities</div>
+  <h1>Marshall Roberson<br><span class="accent">Cybersecurity & IAM</span></h1>
+  <p class="hero-desc">CS graduate with nearly 2 years of hands-on experience in security monitoring, threat detection, IAM operations, and incident response. Building tools that make cloud security more accessible.</p>
+  <div class="hero-tags">
+    <span class="tag">Charlotte, NC</span>
+    <span class="tag">Open to relocation</span>
+
+    <span class="tag">NetDiligence Summit 2025</span>
+    <span class="tag">Division II athlete</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">View projects</a>
+    <a href="#contact" class="btn-secondary">Get in touch</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="skills">
+  <p class="section-label">Expertise</p>
+  <h2 class="section-title">Technical skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><p class="skill-card-cat">SOC & Monitoring</p><p class="skill-card-title">Security operations</p><div class="skill-tags"><span class="skill-tag">Splunk SIEM</span><span class="skill-tag">Alert triage</span><span class="skill-tag">Incident response</span><span class="skill-tag">Log analysis</span><span class="skill-tag">OSINT</span></div></div>
+    <div class="skill-card"><p class="skill-card-cat">Identity & Access</p><p class="skill-card-title">IAM operations</p><div class="skill-tags"><span class="skill-tag">Active Directory</span><span class="skill-tag">RBAC</span><span class="skill-tag">MFA enforcement</span><span class="skill-tag">User lifecycle</span><span class="skill-tag">Access reviews</span></div></div>
+    <div class="skill-card"><p class="skill-card-cat">Tools & Platforms</p><p class="skill-card-title">Security tooling</p><div class="skill-tags"><span class="skill-tag">Wireshark</span><span class="skill-tag">Security Onion</span><span class="skill-tag">MS Defender</span><span class="skill-tag">Kali Linux</span><span class="skill-tag">AWS boto3</span></div></div>
+    <div class="skill-card"><p class="skill-card-cat">Development</p><p class="skill-card-title">Programming</p><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Windsurf IDE</span></div></div>
+    <div class="skill-card"><p class="skill-card-cat">Frameworks</p><p class="skill-card-title">Security standards</p><div class="skill-tags"><span class="skill-tag">MITRE ATT&CK</span><span class="skill-tag">NIST 800-53</span><span class="skill-tag">Defense-in-depth</span><span class="skill-tag">Cyber Kill Chain</span></div></div>
+    <div class="skill-card"><p class="skill-card-cat">Networking</p><p class="skill-card-title">Infrastructure</p><div class="skill-tags"><span class="skill-tag">TCP/IP</span><span class="skill-tag">DNS & DHCP</span><span class="skill-tag">Firewall concepts</span><span class="skill-tag">IDS/IPS</span><span class="skill-tag">Windows Server</span></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="projects">
+  <p class="section-label">Work</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🛡️</div><span class="project-status done">Completed</span></div>
+      <p class="project-title">IAMGuard</p>
+      <p class="project-desc">Open-source Python tool that scans AWS IAM environments for critical misconfigurations — detecting over-privileged users, missing MFA, inactive accounts, aged access keys, and wildcard permissions. Generates risk-scored reports with plain-English remediation guidance. Built with Windsurf IDE and AWS boto3.</p>
+      <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">AWS boto3</span><span class="stack-tag">Cloud security</span><span class="stack-tag">Windsurf IDE</span></div>
+      <a href="https://github.com/marshallroberson24-ux/iamguard" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🔍</div><span class="project-status done">Completed</span></div>
+      <p class="project-title">SIEM threat detection lab</p>
+      <p class="project-desc">Built an enterprise-scale SIEM environment — ingesting logs from multiple sources, engineering custom detection rules for brute-force attacks and lateral movement. Applied MITRE ATT&CK to map adversary TTPs across end-to-end incident response simulations.</p>
+      <div class="project-stack"><span class="stack-tag">Splunk</span><span class="stack-tag">Security Onion</span><span class="stack-tag">Wireshark</span><span class="stack-tag">Kali Linux</span></div>
+      <a href="https://github.com/marshallroberson24-ux" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">🔐</div><span class="project-status done">Completed</span></div>
+      <p class="project-title">Active Directory IAM lab</p>
+      <p class="project-desc">Administered a full Active Directory environment simulating enterprise IAM operations — managing joiner/mover/leaver processes, RBAC enforcement, access reviews, and MFA configuration. Detected privilege escalation through structured log analysis.</p>
+      <div class="project-stack"><span class="stack-tag">Active Directory</span><span class="stack-tag">Windows Server</span><span class="stack-tag">TryHackMe</span><span class="stack-tag">Event logs</span></div>
+      <a href="https://github.com/marshallroberson24-ux" class="project-link">View on GitHub →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-icon">📧</div><span class="project-status done">Completed</span></div>
+      <p class="project-title">Phishing & threat intelligence lab</p>
+      <p class="project-desc">Investigated phishing attack methodologies — analyzing email header anomalies, domain spoofing, and credential theft techniques. Applied OSINT tools to enrich IOCs and contextualize threat actor behaviors applicable to enterprise SOC operations.</p>
+      <div class="project-stack"><span class="stack-tag">TryHackMe</span><span class="stack-tag">OSINT tools</span><span class="stack-tag">Email analysis</span><span class="stack-tag">IOC enrichment</span></div>
+      <a href="https://github.com/marshallroberson24-ux" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="resume">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Resume</h2>
+  <a href="https://raw.githubusercontent.com/marshallroberson24-ux/marshallroberson24-ux.github.io/main/Marshall_Roberson_Resume.pdf" download="Marshall_Roberson_Resume.pdf" class="resume-download">⬇ Download full resume (PDF)</a>
+  <div class="resume-block">
+    <p class="resume-block-title">Experience</p>
+    <div class="resume-item">
+      <div>
+        <p class="resume-item-title">IT Security Coordinator</p>
+        <p class="resume-item-sub">MT Troupe Logistics — Charlotte, NC</p>
+        <ul class="resume-bullets">
+          <li>Strengthened enterprise security posture through SIEM monitoring, alert triage, and structured incident response</li>
+          <li>Managed end-to-end IAM operations including user lifecycle management, RBAC, and access reviews</li>
+          <li>Developed Python automation scripts to streamline security log analysis and access workflows</li>
+        </ul>
+      </div>
+      <span class="resume-item-date">Feb 2024 – Present</span>
+    </div>
+  </div>
+  <div class="resume-block">
+    <p class="resume-block-title">Education</p>
+    <div class="resume-item">
+      <div>
+        <p class="resume-item-title">B.Sc. Computer Science</p>
+        <p class="resume-item-sub">Lincoln University of Pennsylvania &nbsp;·&nbsp; GPA 3.3 &nbsp;·&nbsp; Dean's List ×4 &nbsp;·&nbsp; Division II Basketball</p>
+      </div>
+      <span class="resume-item-date">2022 – 2025</span>
+    </div>
+  </div>
+  <div class="resume-block">
+    <p class="resume-block-title">Certifications & development</p>
+
+    <span class="cert-badge">🏆 NetDiligence Cyber Risk Summit 2025</span>
+    <span class="cert-badge">✅ TryHackMe SOC Level 1</span>
+    <span class="cert-badge">✅ TryHackMe Active Directory</span>
+    <span class="cert-badge">✅ TryHackMe Phishing Analysis</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" id="contact">
+  <p class="section-label">Connect</p>
+  <h2 class="section-title">Get in touch</h2>
+  <div class="contact-grid">
+    <div class="contact-card"><p class="contact-label">Email</p><p class="contact-value" style="font-size:12px; word-break:break-all;"><a href="mailto:marshallroberson24@gmail.com">marshallroberson24@gmail.com</a></p></div>
+    <div class="contact-card"><p class="contact-label">Phone</p><p class="contact-value">(908) 456-6528</p></div>
+    <div class="contact-card"><p class="contact-label">GitHub</p><p class="contact-value"><a href="https://github.com/marshallroberson24-ux" target="_blank">marshallroberson24-ux</a></p></div>
+    <div class="contact-card"><p class="contact-label">Location</p><p class="contact-value">Charlotte, NC · open to relocation</p></div>
+  </div>
+</div>
+
+<footer>Marshall W. Roberson &nbsp;·&nbsp; Cybersecurity & IAM Professional &nbsp;·&nbsp; Charlotte, NC</footer>
+
+</body>
+</html>
